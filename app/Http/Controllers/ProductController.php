@@ -27,9 +27,9 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        return Product::findOrFail($request->id);
+        return Product::findOrFail($id);
     }
 
     /**
@@ -46,9 +46,9 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy(string $id)
     {
-        $product = Product::findOrFail($request->id);
+        $product = Product::findOrFail($id);
         $product->delete();
     }
 }
