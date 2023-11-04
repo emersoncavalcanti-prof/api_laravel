@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
@@ -41,8 +42,19 @@ class ProductController extends Controller
     {
         $data = $request->all();
        
-        $product = Product::findOrFail($id);
-        $product->update($data);
+        $product = Product::find($id);
+
+        if(!$product){
+            return response()->json(['message' => 'Produto não encontrado'], Response::HTTP_NOT_FOUND);
+        }
+        
+        $response = $product->update($data);
+        
+        if(!$response){
+            return response()->json(['message' => 'Erro ao atualizar'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return response()->json(['message' => 'Produto atualizado com sucesso'], Response::HTTP_OK);
     
     }
     /**
