@@ -11,7 +11,7 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,17 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|min:10|max:255',
+            'price' => 'required|numeric'
         ];
     }
+
+    //aqui voce pode modificar a mensagem de erro
+    public function messages():array
+{
+    return [
+        'name.required' => 'O campo nome é obrigatório para atualização.',
+        'price.required' => 'O campo preço é obrigatório para atualização.',
+    ];
+}
 }
