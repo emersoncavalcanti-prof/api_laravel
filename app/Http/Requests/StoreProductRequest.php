@@ -32,7 +32,9 @@ class StoreProductRequest extends FormRequest
 {
     return [
         'name.required' => 'O campo nome é obrigatório para atualização.',
-        'price.required' => 'O campo preço é obrigatório para atualização.',
+        'name.string' => 'O campo nome deve ser uma string.',
+
+        //'price.required' => 'O campo preço é obrigatório para atualização.',
     ];
 }
 }
